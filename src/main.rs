@@ -1,5 +1,5 @@
 /*
-unpackit
+unpadit
 Author: Morgen Malinoski
 Description: This is a quick program I threw together to help with the analysis of a piece of malware encountered in the wild.
     The malware had a bunch of garbage data appended to the end of it to prevent it from being uploaded to VirusTotal. So, this
