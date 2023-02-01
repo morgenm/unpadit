@@ -8,7 +8,7 @@ Description: This is a quick program I threw together to help with the analysis 
 */
 
 use pelite::FileMap;
-use pelite::pe64::{Pe, PeFile};
+use pelite::pe32::{Pe, PeFile};
 use pelite::resources::{DirectoryEntry};
 use pelite::Error;
 use std::fs::File;
@@ -39,7 +39,7 @@ fn main() {
     // Check for excess junk data at end of file, and remove it if found
     let outfile = strip_junk_at_end(file_map.as_ref()).unwrap();
 
-    output_file(outfile);
+    output_file(outfile, args.output_file);
 }
 
 fn strip_junk_at_end(image: &[u8]) -> pelite::Result<&[u8]> {
@@ -73,8 +73,8 @@ fn strip_junk_at_end(image: &[u8]) -> pelite::Result<&[u8]> {
     Err(Error::Bounds) // TODO: Replace with a better error!
 }
 
-fn output_file(image: &[u8]) -> Result<(), &'static str>{
-    let mut out_file = File::create("output.exe").unwrap();
+fn output_file(image: &[u8], fileName: String) -> Result<(), &'static str>{
+    let mut out_file = File::create(fileName).unwrap();
     out_file.write(image);
     Ok(())
 }
